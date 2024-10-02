@@ -18,7 +18,7 @@ impl EsRepository for EsObj {
     
     
     /*
-        
+        test
     */
     async fn get_mustache_template_infos(&self) -> Result<Value, anyhow::Error> {
         
