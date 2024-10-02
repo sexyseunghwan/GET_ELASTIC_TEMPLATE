@@ -10,7 +10,7 @@ use crate::service::es_service::*;
 use crate::service::template_search_service::*;
 
 /*
-
+    메인컨트롤러 영역--
 */
 pub async fn main_controller() {
     
@@ -23,7 +23,6 @@ pub async fn main_controller() {
         }
     };
     
-
     // Elasticsearch connection 생성
     let elastic_conn = match EsHelper::new(
         &config.cluster_name,
@@ -47,6 +46,4 @@ pub async fn main_controller() {
         } 
     }
     
-
-
 }
