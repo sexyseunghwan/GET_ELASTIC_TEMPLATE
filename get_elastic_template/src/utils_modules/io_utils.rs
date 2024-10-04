@@ -25,6 +25,6 @@ pub fn write_to_file(file_path: &str, contents: &str) -> Result<(), anyhow::Erro
 
     // 파일에 내용을 쓰기
     writeln!(file, "{}", contents)?; // 개행을 추가하여 새 줄에 내용 쓰기
-
+    
     Ok(())
 }

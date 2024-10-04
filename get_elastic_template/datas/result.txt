@@ -1,4 +1,0 @@
-my_search_template_1
-my_search_template_2
-my_search_template_3
-my_search_template_4
