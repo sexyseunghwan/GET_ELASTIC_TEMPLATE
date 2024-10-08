@@ -5,23 +5,29 @@ use crate::utils_modules::time_utils::*;
 
 use crate::repository::es_repository::*;
 
-#[derive(Debug, Clone, new)]
-pub struct TemplateService {
-    es_conn: EsRepositoryPub
+#[async_trait]
+pub trait TemplateService {
+    async fn get_templates_name(&self) -> Result<(), anyhow::Error>;
 }
 
-impl TemplateService {
+#[derive(Debug, Clone, new)]
+pub struct TemplateServicePub<R: EsRepository> {
+    es_conn: R
+}
+
+#[async_trait]
+impl<R: EsRepository + Sync + Send> TemplateService for TemplateServicePub<R> {
 
     /*
         특정 Elasticsearch 클러스터에서 운영되는 모든 mustache 템플릿들을 파일에 써주는 함수
     */
-    pub async fn get_templates_name(&self) -> Result<(), anyhow::Error> {
+    async fn get_templates_name(&self) -> Result<(), anyhow::Error> {
 
         // ES 쿼리 던지기
         let res = self.es_conn.get_mustache_template_infos().await?;
-
+        
         // Cluster 이름
-        let cluster_name = self.es_conn.cluster_name().as_str();
+        let cluster_name = self.es_conn.get_cluster_name();
         
         let cur_datetime = get_current_kor_naive_datetime();
         let cur_datetime_str = get_str_from_naive_datetime(cur_datetime);
