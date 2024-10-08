@@ -1,10 +1,4 @@
-use core::panic;
-
 use crate::common::*;
-
-use crate::utils_modules::logger_utils::*;
-
-use crate::repository::es_repository::*;
 
 use crate::service::template_search_service::*;
 
