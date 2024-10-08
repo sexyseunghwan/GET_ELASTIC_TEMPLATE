@@ -14,7 +14,7 @@ impl<S: TemplateService> MainController<S> {
             template_services,
         }
     }
-
+    
     /*
     
     */
@@ -26,11 +26,10 @@ impl<S: TemplateService> MainController<S> {
         */
         let futures = self.template_services.iter().map(|tmpl_service| {
             
-            let service = tmpl_service.clone();
-            
             async move {                
-                service.get_templates_name().await /* 실제 작업을 담당하는 함수 */
+                tmpl_service.get_templates_name().await /* 실제 작업을 담당하는 함수 */
             }
+            
         });
         
         let results = join_all(futures).await;
